@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance Recon Egnine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+	<script src="./assets/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand text-capitalize" href="#info">Information gethering</a>
+          <a class="navbar-brand text-capitalize" href="#gitHubdorking">GitHub dorking</a>
+          <a class="navbar-brand text-capitalize" href="#cMSdorking">CMS dorking</a>
+          <a class="navbar-brand text-capitalize" href="#cVESearch">CVE Search</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Author Informations</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" target="_blank" aria-current="page" href="https://x.com/mijanhaque_">My Twitter</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" target="_blank" href="https://www.linkedin.com/in/mijanhaque/">My Linkedin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://www.facebook.com/mijanhaqueofficial">My Facebook Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://t.me/mijanhaque">My Telegram</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://github.com/h6nt3r">My Github</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <!-- header start -->
+        <form id="info" class="container-fluid">
+            <div class="input-group">
+                <label class="input-group-text fw-bold" for="searchdomain" id="basic-addon1">Enter Target
+                    Domain:</label>
+                <input type="text" class="form-control" id="searchdomain" placeholder="vulnweb.com">
+            </div>
+        </form>
+    <!-- header end -->
+
+    <!-- vuln scan category generic-->
+    <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h4 class="fw-bold">Subdomain finding:</h4>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-12">
+                    <button onclick="subdomainDork('https://crt.sh/?q=%25.example.com')" type="button" class="btn btn-outline-danger m-1">crt.sh</button>
+
+                    <button onclick="subdomainDork('https://dorki.attaxa.com/search?q=site:example.com')" type="button" class="btn btn-outline-danger m-1">dorki.attaxa.com</button>
+
+                    <button onclick="subdomainDork('https://searchdns.netcraft.com/?restriction=site+contains&host=example.com&position=limited')" type="button" class="btn btn-outline-danger m-1">searchdns.netcraft.com</button>
+
+                    <button onclick="subdomainDork('https://securitytrails.com/list/apex_domain/example.com')" type="button" class="btn btn-outline-danger m-1">securitytrails.com</button>
+
+                    
+
+                    <button onclick="subdomainDork('https://www.vedbex.com/subdomain-finder/example.com')" type="button" class="btn btn-outline-danger m-1">vedbex.com</button>
+
+                    <button onclick="subdomainDork('https://viewdns.info/reverseip/?host=example.com&t=1')" type="button" class="btn btn-outline-danger m-1">viewdns.info</button>
+
+                    <button onclick="subdomainDork('site:*.example.com')" type="button" class="btn btn-outline-danger m-1">*.Google</button>
+
+                    <button onclick="subdomainDork('site:*.example.com.*')" type="button" class="btn btn-outline-danger m-1">*.Google.*</button>
+
+                    <button onclick="subdomainDork('site:*.*.example.com.*')" type="button" class="btn btn-outline-danger m-1">*.*.Google.*</button>
+
+                    <button onclick="subdomainDork('site:*.*.*.example.com')" type="button" class="btn btn-outline-danger m-1">*.*.*.Google</button>
+
+                    <button onclick="subdomainDork('site:*.*.*.*.example.com')" type="button" class="btn btn-outline-danger m-1">*.*.*.*.Google</button>
+
+                    <button onclick="subdomainDork('site:*.*.*.*.*.example.com')" type="button" class="btn btn-outline-danger m-1">*.*.*.*.*.Google</button>
+
+                    <button onclick="subdomainDork('site:*.*.*.*.*.*.*.example.com')" type="button" class="btn btn-outline-danger m-1">*.*.*.*.*.*.*.Google</button>
+
+		            <button onclick="subdomainDork('https://hunter.how/list?searchValue=domain%3D%22example.com%22&timestamp=1731998971095')" type="button" class="btn btn-outline-danger m-1">hunter.how</button>
+
+                    <button onclick="subdomainDork('https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=example.com')" type="button" class="btn btn-outline-danger m-1">search.censys.io</button>
+                    
+                    <button onclick="subdomainDork('https://www.shodan.io/search?query=example.com')" type="button" class="btn btn-outline-danger m-1">shodan.io</button>
+
+                    <button onclick="subdomainDork('https://www.bing.com/search?q=domain%3Aexample.com&qs=n&form=QBRE&sp=-1&lq=0&pq=domain%3Aexample.com&sc=0-18&sk=&cvid=254076E88676423F9EE4789865C87CC7&ghsh=0&ghacc=0&ghpl=')" type="button" class="btn btn-outline-danger m-1">Bing</button>
+            </div>
+        </div>
+    </div>
+        <!-- vuln scan category 0 -->
+
+    <!-- vuln scan category 4 -->
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-6">
+                <h4 class="fw-bold">Technology detector:</h4>
+                <button onclick="gitDork('https://builtwith.com/example.com')" type="button" class="btn btn-outline-danger m-1">builtwith.com</button>
+
+                <button onclick="gitDork('https://webtechsurvey.com/website/example.com')" type="button" class="btn btn-outline-danger m-1">webtechsurvey.com</button>
+
+                <button onclick="gitDork('https://w3techs.com/sites/info/example.com')" type="button" class="btn btn-outline-danger m-1">w3techs.com</button>
+
+                <button onclick="genericDork('https://whatcms.org/?s=example.com')" type="button" class="btn btn-outline-danger m-1">whatcms.org</button>
+            </div>
+            <div class="col-6">
+                <h4 class="fw-bold">Origin IP finding:</h4>
+                <button onclick="genericDork('https://www.shodan.io/search?query=Ssl.cert.subject.CN%3A%22example.com%22+200')" type="button" class="btn btn-outline-danger m-1">shodan.io(Method 1)</button>
+                
+                <button onclick="genericDork('https://www.shodan.io/search?query=ssl%3A%22example.com%22+200')" type="button" class="btn btn-outline-danger m-1">shodan.io(Method 2)</button>
+
+                <button onclick="genericDork('https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=example.com')" type="button" class="btn btn-outline-danger m-1">search.censys.io</button>
+
+                <button onclick="genericDork('https://viewdns.info/iphistory/?domain=example.com')" type="button" class="btn btn-outline-danger m-1">viewdns.info</button>
+
+                <button onclick="genericDork('https://mxtoolbox.com/SuperTool.aspx?action=spf%3aexample.com&run=toolpage#')" type="button" class="btn btn-outline-danger m-1">mxtoolbox.com</button>
+
+                <button onclick="genericDork('https://securitytrails.com/domain/example.com/history/a')" type="button" class="btn btn-outline-danger m-1">securitytrails.com</button>
+
+                
+            </div>
+        </div>
+    </div>
+    <!-- vuln scan category 4 -->
+
+<!-- vuln scan category 0.1 -->
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-6">
+                <h4 class="fw-bold">Port scanning:</h4>
+                <button onclick="portDork('https://viewdns.info/portscan/?host=example.com')" type="button" class="btn btn-outline-danger m-1">viewdns.info</button>
+
+                <button onclick="portDork('https://dnschecker.org/port-scanner.php?query=example.com&ptype=server')" type="button" class="btn btn-outline-danger m-1">dnschecker.org</button>
+                
+                <button onclick="portDork('https://web-check.xyz/check/example.com')" type="button" class="btn btn-outline-danger m-1">web-check.xyz</button>
+            </div>
+
+            <div class="col-6">
+                <h4 class="fw-bold">URLs collecting:</h4>
+
+                <button onclick="urlDork('https://web.archive.org/cdx/search/cdx?url=example.com/*&output=txt&collapse=urlkey&fl=original&page=/')" type="button" class="btn btn-outline-danger m-1">web.archive.org</button>
+
+                <button onclick="urlDork('https://web.archive.org/cdx/search/cdx?url=*.example.com/*&output=txt&collapse=urlkey&fl=original&page=/')" type="button" class="btn btn-outline-danger m-1">web.archive.org(wildcard)</button>
+
+                <button onclick="urlDork('https://urlscan.io/api/v1/search/?q=example.com&size=10000')" type="button" class="btn btn-outline-danger m-1">urlscan.io</button>
+
+                <button onclick="urlDork('https://otx.alienvault.com/api/v1/indicators/hostname/example.com/url_list?limit=500&page=1')" type="button" class="btn btn-outline-danger m-1">otx.alienvault.com</button>
+
+                <button onclick="urlDork('https://otx.alienvault.com/api/v1/indicators/domain/example.com/url_list?limit=500&page=1')" type="button" class="btn btn-outline-danger m-1">otx.alienvault.com(wildcard)</button>
+
+                <button onclick="urlDork('https://www.virustotal.com/vtapi/v2/domain/report?apikey=3b3467a2b03a10b2bdc43c7fee43122e70628e65becd7fbae2d95d38f26bd7f9&domain=example.com')" type="button" class="btn btn-outline-danger m-1">virustotal.com (API)</button>
+            </div>
+        </div>
+    </div>
+<!-- vuln scan category 0.1 -->
+
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-12">
+                <h4 class="fw-bold">Information disclosure:</h4>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-12">
+                <button onclick="genericDork('site:example.com intitle:index.of')" type="button" class="btn btn-outline-danger m-1">Directory listing vulnerabilities</button>
+
+                <button onclick="genericDork('site:example.com intitle:index of inurl:ftp')" type="button" class="btn btn-outline-danger m-1">exposed FTP</button>
+
+		<button onclick="genericDork('site:example.com filetype:pdf')" type="button" class="btn btn-outline-danger m-1">Find PDF's</button>
+
+                <button onclick="genericDork('site:example.com ext:xml | ext:conf | ext:cnf | ext:reg | ext:inf | ext:rdp | ext:cfg | ext:txt | ext:ora | ext:ini')" type="button" class="btn btn-outline-danger m-1">Exposed configuration file</button>
+
+                <button onclick="genericDork('site:example.com intext:uploadimage | intext:Upload File')" type="button" class="btn btn-outline-danger m-1">File upload endpoints</button>
+
+                <button onclick="genericDork('site:example.com ext:sql | ext:dbf | ext:mdb')" type="button" class="btn btn-outline-danger m-1">Exposed database</button>
+
+                <button onclick="genericDork('site:example.com ext:log')" type="button" class="btn btn-outline-danger m-1">Exposed Log</button>
+
+                <button onclick="genericDork('site:example.com ext:bkf | ext:bkp | ext:bak | ext:old | ext:backup')" type="button" class="btn btn-outline-danger m-1">Backup & Old files</button>
+
+                <button onclick="genericDork('site:example.com ext:doc | ext:docx | ext:odt | ext:pdf | ext:rtf | ext:sxw | ext:psw | ext:ppt | ext:pptx | ext:pps | ext:csv ')" type="button" class="btn btn-outline-danger m-1">Publicly exposed documents</button>
+
+                <button onclick="genericDork('site:example.com inurl:email | inurl:emails ext:txt | ext:xlsx | ext:doc | ext:docx')" type="button" class="btn btn-outline-danger m-1">Find emails</button>
+
+                <button onclick="genericDork('site:example.com intext:admin.password')" type="button" class="btn btn-outline-danger m-1">Find password 1</button>
+
+                <button onclick="genericDork('site:example.com `admin_password` ext:txt | ext:log | ext:cfg')" type="button" class="btn btn-outline-danger m-1">Find password 2</button>
+
+                <button onclick="genericDork('site:example.com filetype:log intext:password after:2016 intext:@gmail.com | @yahoo.com | @hotmail.com')" type="button" class="btn btn-outline-danger m-1">Find password emails</button>
+
+                <button onclick="genericDork('site:example.com ext:txt | ext:pdf | ext:xml | ext:xls | ext:xlsx | ext:ppt | ext:pptx | ext:doc | ext:docx intext:“confidential” | intext:“Not for Public Release” | intext:”internal use only” | intext:“do not distribute” | ext:rtf | ext:csv | ext:json | ext:zip | ext:rar | ext:log | ext:conf | ext:sql | ext:cnf | ext:ini | ext:env | ext:sh | ext:swp | ext:~ | ext:git | ext:svn | ext:htpasswd | ext:htaccess')" type="button" class="btn btn-outline-danger m-1">Sensitive Documents #1</button>
+
+                <button onclick="genericDork('site:example.com filetype:config apache')" type="button" class="btn btn-outline-danger m-1">Apache config Files</button>
+
+                <button onclick="genericDork('site:example.com ext:action | ext:struts | ext:do')" type="button" class="btn btn-outline-danger m-1">Apache STRUTS RCE</button>
+
+                <button onclick="genericDork('example.com/robots.txt')" type="button" class="btn btn-outline-danger m-1">Robots.txt</button>
+
+                <button onclick="genericDork('site:example.com ext:php intitle:phpinfo published')" type="button" class="btn btn-outline-danger m-1">phpinfo</button>
+
+                <button onclick="genericDork('site:*/server-status apache')" type="button" class="btn btn-outline-danger m-1">Apache Server Status</button>
+
+                <button onclick="genericDork('site:example.com inurl:/phpinfo.php | inurl:.htaccess')" type="button" class="btn btn-outline-danger m-1">.htaccess sensitive files</button>
+
+                <button onclick="genericDork('site:example.com  inurl:readme | inurl:license | inurl:install | inurl:setup | inurl:config')" type="button" class="btn btn-outline-danger m-1">Install/Setup Files</button>
+
+                <button onclick="genericDork('site:http://ideone.com | site:http://codebeautify.org | site:http://codeshare.io | site:http://codepen.io | site:http://repl.it | site:http://justpaste.it | site:http://pastebin.com | site:http://jsfiddle.net | site:http://trello.com | site:*.atlassian.net | site:bitbucket.org example.com')" type="button" class="btn btn-outline-danger m-1">3rd Party Exposure</button>
+
+                <button onclick="genericDork('site:example.com%20(intext:%22aws_access_key_id%22%20OR%20intext:%22aws_secret_access_key%22)%20(filetype:json%20OR%20filetype:yaml)')" type="button" class="btn btn-outline-danger m-1">Finding exposed cloud service credentials</button>
+
+                <button onclick="genericDork('site:digitaloceanspaces.com example.com')" type="button" class="btn btn-outline-danger m-1">Digital Ocean Spaces </button>
+
+                <button onclick="genericDork('site:firebaseio.com &quot;example.com&quot;')" type="button" class="btn btn-outline-danger m-1">Firebase</button>
+
+                <button onclick="genericDork('site:.s3.amazonaws.com example.com')" type="button" class="btn btn-outline-danger m-1">s3 Bucket</button>
+
+                <button onclick="genericDork('site:googleapis.com &quot;example.com&quot;')" type="button" class="btn btn-outline-danger m-1">Google APIs</button>
+
+                <button onclick="genericDork('site:drive.google.com &quot;example.com&quot;')" type="button" class="btn btn-outline-danger m-1">Google drive</button>
+
+                <button onclick="genericDork('site:dev.azure.com &quot;example.com&quot;')" type="button" class="btn btn-outline-danger m-1">Azure</button>
+
+                <button onclick="genericDork('site:onedrive.live.com &quot;example.com&quot;')" type="button" class="btn btn-outline-danger m-1">OneDrive</button>
+
+                <button onclick="genericDork('site:dropbox.com/s &quot;example.com&quot;')" type="button" class="btn btn-outline-danger m-1">DropBox</button>
+
+                <button onclick="genericDork('site:docs.google.com inurl:&quot;/d/&quot; &quot;example.com&quot;')" type="button" class="btn btn-outline-danger m-1">Google Docs</button>
+
+                <button onclick="genericDork('https://viewdns.info/reverseip/?host=example.com&t=1')" type="button" class="btn btn-outline-danger m-1">Reverse IP Lookup </button>
+
+                <button onclick="genericDork('https://publicwww.com/websites/example.com')" type="button" class="btn btn-outline-danger m-1">Source Code-Public[WWW]</button>
+
+                <button onclick="genericDork('https://securityheaders.com/?q=example.com')" type="button" class="btn btn-outline-danger m-1">securityheaders.com</button>
+
+                <button onclick="genericDork('https://iplocation.io/website-server-software/example.com')" type="button" class="btn btn-outline-danger m-1">Check Website OS</button>
+
+                <button onclick="genericDork('site:example.com inurl:login | inurl:admin | inurl:login | inurl:logon | inurl:sign-in | inurl:signin | inurl:signup | inurl:sign-up | inurl:dash | inurl:portal | inurl:panel | inurl:register | inurl:administrator')" type="button" class="btn btn-outline-danger m-1">Login/Admin finder</button>
+
+                <button onclick="genericDork('site:example.com  inurl:shell | inurl:backdoor | inurl:wso | inurl:cmd | shadow | passwd | boot.ini | inurl:backdoor | intitle:Mini Shell')" type="button" class="btn btn-outline-danger m-1">Finding Backdoors</button>
+
+                <button onclick="genericDork('site:linkedin.com employees example.com')" type="button" class="btn btn-outline-danger m-1">Employees on LinkedIn</button>
+
+                <button onclick="genericDork('site:facebook.com employees example.com')" type="button" class="btn btn-outline-danger m-1">Employees on facebook</button>
+
+                <button onclick="genericDork('site:twitter.com employees example.com')" type="button" class="btn btn-outline-danger m-1">Employees on twitter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- vuln scan category 1 -->
+
+    <!-- vuln scan category 2 -->
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-12">
+                <h4 class="fw-bold">All vulnerability:</h4>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-12">
+                <button onclick="allDork('site:example.com  inurl:cat= | inurl:search= | inurl:action= | inurl:module= | inurl:rep= | inurl:review= | inurl:rep= | inurl:rep= | inurl:rep= | inurl:rep= | inurl:rep= | inurl:total= | inurl:selectID= | inurl:page= | inurl:search= | inurl:recherche= | inurl:term= | inurl:misc= | inurl:idProduct= | inurl:num= | inurl:idCategory= | inurl:no= | inurl:table= | inurl:bbs= | inurl:bookPageNo= | inurl:proj_nr= | inurl:card= | inurl:category= | inurl:LAN= | inurl:cid= | inurl:class= | inurl:column= | inurl:p= | inurl:mode= | inurl:date= | inurl:cPath= | inurl:delete= | inurl:dir= | inurl:chnum= | inurl:code= | inurl:email= | inurl:T****= | inurl:fetch= | inurl:file= | inurl:field= | inurl:first name= | inurl:form= | inurl:from= | inurl:filter= | inurl:pr= | inurl:gubun=')" type="button" class="btn btn-outline-danger m-1">SQLi Parameters (51)</button>
+
+                <button onclick="allDork('site:example.com  inurl:doc= | inurl:code= | inurl:data= | inurl:id= | inurl:view= | inurl:i= | inurl:modus= | inurl:section= | inurl:site= | inurl:url= | inurl:w= | inurl:item= | inurl:join= | inurl:board= | inurl:keyword= | inurl:lang= | inurl:last name= | inurl:login= | inurl:ps_db= | inurl:main= | inurl:menu= | inurl:typeboard= | inurl:name= | inurl:nav= | inurl:t= | inurl:news= | inurl:number= | inurl:show= | inurl:order= | inurl:orm= | inurl:ref= | inurl:modul= | inurl:params= | inurl:pass= | inurl:password= | inurl:PageID= | inurl:pid= | inurl:process= | inurl:shop= | inurl:q= | inurl:query= | inurl:region= | inurl:register= | inurl:report= | inurl:reset password= | inurl:reset= | inurl:results= | inurl:role= | inurl:row= | inurl:search= | inurl:sel= | inurl:select= | inurl:sleep= | inurl:sort= | inurl:string= | inurl:table= | inurl:thread= | inurl:time= | inurl:title= | inurl:topic= | inurl:type= | inurl:update= | inurl:url= | inurl:user= | inurl:username= | inurl:users= | inurl:view= | inurl:where=')" type="button" class="btn btn-outline-danger m-1">SQLi Parameters (68)</button>
+
+                <button onclick="allDork('site:example.com intext:Syntax error | intext:Fatal error | intext:MariaDB | intext:corresponds | intext:Database Error | intext:syntax | intext:/usr/www | intext:public_html | intext:database error | intext:on line | intext:RuntimeException | intext:mysql_ | intext:MySQL | intext:PSQLException | intext:at line | intext:You have an error in your SQL syntax | intext:mysql_query() | intext:pg_connect() | intext:SQLiteException | intext:ORA- | intext:invalid input syntax for type | intext:unterminated quoted string | intext:PostgreSQL query failed: | intext:unrecognized token: | intext:binding parameter | intext:undeclared variable: | intext:SQLSTATE | intext:constraint failed | intext:ORA-00936: missing expression | intext:ORA-06512: | intext:PLS- | intext:SP2- | intext:dynamic SQL error | intext:SQL command not properly ended | intext:T-SQL Error | intext:Msg  | intext:Level  | intext:Unclosed quotation mark after the character string | intext:quoted string not properly terminated | intext:Incorrect syntax near | intext:An expression of non-boolean type specified in a context where a condition is expected | intext:Conversion failed when converting | intext:Unclosed quotation mark before the character string | intext:SQL Server | intext:OLE DB | intext:Unknown column | intext:Access violation | intext:No such host is known | intext:server error | intext:syntax error at or near | intext:column does not exist | intext:could not prepare statement | intext:no such table: | intext:near | intext:unknown error | intext:unexpected end of statement | intext:ambiguous column name | intext:database is locked | intext:permission denied | intext:attempt to write a readonly database | intext:out of memory | intext:disk I/O error | intext:cannot attach the file | intext:operation is not allowed in this state | intext:data type mismatch | intext:cannot open database | intext:table or view does not exist | intext:index already exists | intext:index not found | intext:division by zero | intext:value too large for column')" type="button" class="btn btn-outline-danger m-1">Error SQLIs (71)</button>
+
+                <button onclick="allDork('site:example.com intext:deadlock detected | intext:invalid operator | intext:sequence does not exist | intext:duplicate key value violates unique constraint | intext:string data, right truncated | intext:insufficient privileges | intext:missing keyword | intext:too many connections | intext:configuration limit exceeded | intext:network error while attempting to read from the file | intext:cannot rollback - no transaction is active | intext:feature not supported | intext:system error | intext:object not in prerequisite state | intext:login failed for user | intext:remote server is not known')" type="button" class="btn btn-outline-danger m-1">Error SQLIs (16)</button>
+
+                <button onclick="allDork('site:example.com inurl:search.php | inurl:process.php | inurl:admin-post.php')" type="button" class="btn btn-outline-danger m-1">Post Parameters (3)</button>
+
+                <button onclick="allDork('site:example.com inurl:redir= | inurl:url= | inurl:redirect= | inurl:return= | inurl:src=http | inurl:r=http | inurl:goto= | inurl:Lmge_url= | inurl:Open= | inurl:cgi-bin/redirect.cgi | inurl:checkout= | inurl:data= | inurl:dir= | inurl:domain= | inurl:feed= | inurl:file= | inurl:file_name= | inurl:file_url= | inurl:folder= | inurl:forward= | inurl:from_uri= | inurl:goto= | inurl:host= | inurl:html= | inurl:img_url= | inurl:load_file= | inurl:load_url= | inurl:login?to= | inurl:login_url= | inurl:logout= | inurl:navigation= | inurl:next_page= | inurl:page= | inurl:page_url= | inurl:redirect_to= | inurl:redirect_uri= | inurl:reference= | inurl:return_url= | inurl:rt= | inurl:ret= | inurl:r2=')" type="button" class="btn btn-outline-danger m-1">Open Redirects (41)</button>
+
+                <button onclick="allDork('site:example.com inurl:show= | inurl:site= | inurl:uri= | inurl:val= | inurl:next= | inurl:url= | inurl:target= | inurl:rurl= | inurl:dest= | inurl:redir= | inurl:out= | inurl:image_url= | inurl:returnTo= | inurl:checkout_url= | inurl:continue= | inurl:=http | inurl:?next= | inurl:nexrurI=')" type="button" class="btn btn-outline-danger m-1">Open Redirects (18)</button>
+
+                <button onclick="allDork('site:example.com inurl:redir | inurl:url= | inurl:redirect= | inurl:return= | inurl:dest= | inurl:uri= | inurl:path= | inurl:continue= | inurl:window= | inurl:next= | inurl:data= | inurl:reference= | inurl:site= | inurl:html= | inurl:val= | inurl:validate= | inurl:domain= | inurl:callback= | inurl:feed= | inurl:host= | inurl:port= | inurl:to= | inurl:out= | inurl:view= | inurl:dir=')" type="button" class="btn btn-outline-danger m-1">SSRF Params (24)</button>
+
+                <button onclick="allDork('site:example.com inurl:cmd= | inurl:exec= | inurl:command= | inurl:execute= | inurl:ping= | inurl:query= | inurl:jump= | inurl:code= | inurl:reg= | inurl:do= | inurl:func= | inurl:arg= | inurl:option= | inurl:load= | inurl:process= | inurl:step= | inurl:read= | inurl:feature= | inurl:exe= | inurl:module= | inurl:payload= | inurl:run= | inurl:print=')" type="button" class="btn btn-outline-danger m-1">RCE Params (23)</button>
+
+                <button onclick="allDork('site:example.com inurl:q= | inurl:s= | inurl:username= | inurl:search= | inurl:id= | inurl:lang= | inurl:keyword= | inurl:query= | inurl:page= | inurl:year= | inurl:view= | inurl:email= | inurl:type= | inurl:name= | inurl:p= | inurl:month= | inurl:image= | inurl:list_type= | inurl:url= | inurl:terms= | inurl:categoryid= | inurl:key= | inurl:l= | inurl:begindate= | inurl:enddate= | inurl:inviteby= | inurl:utm_source=')" type="button" class="btn btn-outline-danger m-1">XSS Params (27)</button>
+		   
+		    <button onclick="allDork('site:example.com inurl:errmsg= | inurl:option= | inurl:Itemid= | inurl:faq= | inurl:key= | inurl:news_type= | inurl:sid= | inurl:msg= | inurl:msg1= | inurl:session= | inurl:search_keywords= | inurl:sfunction= | inurl:order_direction= | inurl:author= | inurl:feedback= | inurl:max= | inurl:searchstring= | inurl:tag= | inurl:txt= | inurl:vote= | inurl:catid= | inurl:redirectUrl=')" type="button" class="btn btn-outline-danger m-1">XSS Params (22)</button>
+
+                <button onclick="allDork('site:example.com inurl:user= | inurl:id= | inurl:email= | inurl:account= | inurl:number= | inurl:order= | inurl:no= | inurl:doc= | inurl:key= | inurl:group= | inurl:profile= | inurl:edit= | inurl:report= ')" type="button" class="btn btn-outline-danger m-1">Idor Params (12)</button>
+
+                <button onclick="allDork('site:example.com inurl:cat= | inurl:dir= | inurl:action= | inurl:board= | inurl:date= | inurl:file= | inurl:download= | inurl:path= | inurl:folder= | inurl:prefix= | inurl:include= | inurl:page= | inurl:inc= | inurl:locate= | inurl:show= | inurl:doc= | inurl:site= | inurl:type= | inurl:view= | inurl:content= | inurl:document= | inurl:layout= | inurl:mod= | inurl:conf=')" type="button" class="btn btn-outline-danger m-1">LFI Params (24)</button>
+
+                <button onclick="allDork('site:example.com ext:xls | ext:xml | ext:xlsx | ext:json | ext:pdf | ext:sql | ext:doc | ext:docx | ext:pptx | ext:txt | ext:zip | ext:tar\.gz | ext:tgz | ext:bak | ext:7z | ext:rar | ext:log | ext:cache | ext:secret | ext:db | ext:backup | ext:yml | ext:gz | ext:config | ext:csv | ext:yaml | ext:md | ext:md5 | ext:tar | ext:xz | ext:7zip | ext:p12 | ext:pem | ext:key | ext:crt | ext:csr | ext:sh | ext:pl | ext:py | ext:java | ext:class | ext:jar | ext:war | ext:ear | ext:sqlitedb | ext:sqlite3 | ext:dbf | ext:db3 | ext:accdb | ext:mdb | ext:sqlcipher | ext:gitignore | ext:env | ext:ini | ext:conf | ext:properties | ext:plist | ext:cfg')" type="button" class="btn btn-outline-danger m-1">information disclosure ext (58)</button>
+            </div>
+        </div>
+    </div>
+    <!-- vuln scan category 2 -->
+
+    <!-- vuln scan category 4 -->
+    <div id="gitHubdorking" class="container-fluid mt-5">
+        <div class="row text-center">
+            <div class="col-12">
+                <h4 class="fw-bold">GitHub normal dorking:</h4>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-12">
+                <button onclick="gitDork('inurl:gitlab example.com')" type="button" class="btn btn-outline-danger m-1">GitLab</button>
+                <button onclick="gitDork('site:example.com/.git/')" type="button" class="btn btn-outline-danger m-1">.git</button>
+                
+                <button onclick="gitDork('https://github.com/search?q=%27API_KEY%27%20OR%20%27api_key%27%20OR%20%27API_SECRET%27%20OR%20%27api_secret%27%20example.com&type=code')" type="button" class="btn btn-outline-danger m-1">API_KEY/api_key/API_SECRET/api_secret</button>
+
+                <button onclick="gitDork('https://github.com/search?q=filename%3A.env+example.com&type=code')" type="button" class="btn btn-outline-danger m-1">filename:.env</button>
+
+                <button onclick="gitDork('https://github.com/search?q=%27password%27%20OR%20%27secrat%27%20OR%20%27credential%27%20example.com&type=code')" type="button" class="btn btn-outline-danger m-1">password/secrat/credential</button>
+
+                <button onclick="gitDork('https://github.com/search?q=%22confidential%22+OR+%22sensitive%22+example.com&type=code')" type="button" class="btn btn-outline-danger m-1">confidential/sensitive</button>
+
+                <button onclick="gitDork('https://github.com/search?q=%22fatal%22+OR+%22error%22+OR+%22exception%22+example.com&type=code')" type="button" class="btn btn-outline-danger m-1">fatal/error/exception</button>
+                
+                <button onclick="gitDork('https://github.com/search?q=%22password%22+OR+%22secret%22+OR+%22credential%22++in%3Afile+branch.*+example.com&type=code')" type="button" class="btn btn-outline-danger m-1">password/secret/credential/in:file branch.*</button>
+                
+                <button onclick="gitDork('https://github.com/search?q=extension%3Ajson+OR+extension.yml+OR+extension.xml+OR+extension%3Aconfig+example.com&type=code')" type="button" class="btn btn-outline-danger m-1">extension:json/yml/xml/config</button>
+                
+                <button onclick="gitDork('https://github.com/search?q=%22token%22+OR+%22access_token%22+example.com&type=code')" type="button" class="btn btn-outline-danger m-1">token/access_token</button>
+                
+                <button onclick="gitDork('https://github.com/search?q=filename%3Aconfig+filename%3Asettings+example.com&type=code')" type="button" class="btn btn-outline-danger m-1">filename:config/settings</button>
+                
+                <button onclick="gitDork('https://github.com/search?q=secrets.+example.com&type=code')" type="button" class="btn btn-outline-danger m-1">secrets.</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h4 class="fw-bold">GitHub advance dorking:</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <label class="input-group-text">Payloads link</label> 
+                    <input type="text"  id="urla" class="form-control" placeholder="Enter your payloads link" value="https://raw.githubusercontent.com/freelancermijan/githubreconengine/refs/heads/main/git-dorks.txt">
+                    <button class="btn btn-danger" onclick="getKeywordss()">Get Lists</button>
+                </div>
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="keywords1" style="height: 400px"></textarea>
+                    <label for="floatingTextarea2">Enter your custom payloads by every new line</label>
+                  </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Target</span> 
+                    <input type="text" id="targets" value='"vulnweb.com" OR org:vulnweb.com' class="form-control" placeholder='"vulnweb.com" OR org:vulnweb.com'>
+                    <button class="btn btn-danger input-group-text" onclick="Generate()">Generate links</button>
+                </div>
+                <table>
+                    <div id="results" style="height:400px;overflow:scroll;"></div>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- vuln scan category 4 -->
+
+    <!-- vuln scan category 4 -->
+    <div id="cMSdorking" class="container-fluid mt-5">
+        <div class="row text-center">
+            <div class="col-12">
+                <h4 class="fw-bold">CMS dorking:</h4>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-12">
+                <button onclick="cmsDork('site:example.com inurl:/wp-content | inurl:/wp-includes | inurl:wp-admin.php | inurl:wp-config.php | wp-content/uploads | inurl:Wp-load | inurl:wp-signup.php | inurl:Wp-json | inrul:wp-includes | inurl:index.php | inurl:wp-login.php | inurl:wp-links-opml.php | inurl:wp-activate.php | inurl:wp-blog-header.php | inurl:wp-cron.php | inurl:wp-links.php | inurl:wp-mail.php | inurl:xmlrpc.php | inurl:wp-settings.php | inurl:wp-trackback.php | inurl:admin-bar.php')" type="button" class="btn btn-outline-danger m-1">WP juicy ext (19)</button>
+
+                <button onclick="cmsDork('site:example.com filetype:sql intext:wp_users phpmyadmin')" type="button" class="btn btn-outline-danger m-1">wp_users</button>
+            </div>
+        </div>
+    </div>
+    <!-- vuln scan category 4 -->
+
+    <div id="cVESearch" class="container-fluid mt-5">
+        <div class="row text-center pt-4">
+            <div class="col-12">
+                <h4 class="fw-bold">CVE Search:</h4>
+                <form class="">
+                    <div class="input-group">
+                        <label class="input-group-text fw-bold" for="searccve" id="basic-addon1">Enter the CVE:</label>
+                        <input type="text" class="form-control" id="searccve" placeholder="2020-2020">
+                    </div>
+                </form>
+            </div>
+        </div>  
+        <div class="row text-center">
+            <div class="col-12">
+                <button onclick="cveDork('https://0day.today/search?search_request=example.com')" type="button" class="btn btn-outline-danger m-1">0day.today</button>
+
+                <button onclick="cveDork('https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=example.com')" type="button" class="btn btn-outline-danger m-1">cve.mitre.org</button>
+
+                <button onclick="cveDork('https://access.redhat.com/security/security-updates/cve?q=example.com&p=1&sort=cve_publicDate+desc,allTitle+desc&rows=10&documentKind=Cve')" type="button" class="btn btn-outline-danger m-1">access.redhat.com</button>
+
+                <button onclick="cveDork('https://www.exploit-db.com/search?cve=example.com')" type="button" class="btn btn-outline-danger m-1">exploit-db.com</button>
+                
+                <button onclick="cveDork('https://www.vulnerability-lab.com/search.php?cve=example.com&submit=Search')" type="button" class="btn btn-outline-danger m-1">vulnerability-lab.com</button>
+
+                <button onclick="cveDork('https://packetstormsecurity.com/search/?q=example.com')" type="button" class="btn btn-outline-danger m-1">packetstormsecurity.com</button>
+                
+                <button onclick="cveDork('https://www.cisa.gov/search?g=example.com#gsc.tab=0&gsc.q=example.com&gsc.page=1')" type="button" class="btn btn-outline-danger m-1">cisa.gov</button>
+
+                <button onclick="cveDork('https://www.google.com/search?q=site%3Agithub.com+cve+example.com&sca_esv=e462d2f4ddcc7e7e&sxsrf=ADLYWILXBF23cSL2aeLRXmjdmvhpKpeJjA%3A1730562035364&ei=80cmZ8zxFeCx4-EPlbCz4Q8&ved=0ahUKEwiMt4T7_b2JAxXg2DgGHRXYLPwQ4dUDCA8&uact=5&oq=site%3Agithub.com+cve+2020-12720&gs_lp=Egxnd3Mtd2l6LXNlcnAiHnNpdGU6Z2l0aHViLmNvbSBjdmUgMjAyMC0xMjcyMEjNHFDrBlirEnABeACQAQCYAc4BoAH-CqoBBTAuNy4xuAEDyAEA-AEBmAIAoAIAmAMAiAYBkgcAoAfoAg&sclient=gws-wiz-serp')" type="button" class="btn btn-outline-danger m-1">cve in github</button>
+                
+                <button onclick="cveDork('https://github.com/search?q=cve+example.com&type=code')" type="button" class="btn btn-outline-danger m-1">cve in github 2</button>
+                
+                <button onclick="cveDork('https://www.google.com/search?q=cve+example.com+exploit+-github.com+-packetstormsecurity.com+-cxsecurity.com+-cvedetails.com+-access.redhat.com+-exploit-db.com+-rapid7.com+-vulnerability-lab.com+-0day.today+-cisa.gov&sca_esv=e462d2f4ddcc7e7e&sxsrf=ADLYWIKpvlnN6HFP6BzKoIlmnwi5AqjOMA%3A1730563452754&ei=fE0mZ8fULdzVg8UPr_2-GQ&ved=0ahUKEwjHgvOeg76JAxXc6qACHa--LwMQ4dUDCA8&uact=5&oq=cve+2020-12720+exploit+-github.com+-packetstormsecurity.com+-cxsecurity.com+-cvedetails.com+-access.redhat.com+-exploit-db.com+-rapid7.com+-vulnerability-lab.com+-0day.today+-cisa.gov&gs_lp=Egxnd3Mtd2l6LXNlcnAitwFjdmUgMjAyMC0xMjcyMCBleHBsb2l0IC1naXRodWIuY29tIC1wYWNrZXRzdG9ybXNlY3VyaXR5LmNvbSAtY3hzZWN1cml0eS5jb20gLWN2ZWRldGFpbHMuY29tIC1hY2Nlc3MucmVkaGF0LmNvbSAtZXhwbG9pdC1kYi5jb20gLXJhcGlkNy5jb20gLXZ1bG5lcmFiaWxpdHktbGFiLmNvbSAtMGRheS50b2RheSAtY2lzYS5nb3ZI3yFQpANY4g5wAXgAkAEAmAG8AaABvAGqAQMwLjG4AQPIAQD4AQH4AQKYAgCgAgCYAwCIBgGSBwCgBy0&sclient=gws-wiz-serp')" type="button" class="btn btn-outline-danger m-1">cve in google</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-12">
+                <h5>More dork engines</h5>
+                <p class=""><a class="p-2" href="https://www.exploit-db.com" target="_blank">exploit-db.com</a><a class="p-2" href="https://dorki.attaxa.com/dashboard" target="_blank">dorki.attaxa.com</a><a  class="p-2" href="https://dorksearch.com" target="_blank">dorksearch.com</a> </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row text-center pt-4">
+            <div class="col-12">
+                <p class=""> Developed by <a href="https://x.com/mijanhaque_" target="_blank">Mijanur Rahman</a> </p>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="./assets/script.js"></script>
+</body>
+</html>
