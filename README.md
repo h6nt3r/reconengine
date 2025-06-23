@@ -1,15 +1,25 @@
 <img src="./images/recon-engine.png" alt="Recon Engine">
 
-## Features. 
+# 🔍 Advanced Recon Engine – Feature Overview
 
-- **Subdomain finding:**
-- **Technology detector:**
-- **Port scanning:**
-- **URLs collecting:**
-- **All vulnerability Scanner:**
-- **Github advance dorking:**
-- **Github custom payloads dorking:**
-- **CMS dorking:**
-- **Generic:**
-- **cve search :**
-- **Many more keep updating:**
+## 🌐 Purpose
+**Advanced Recon Engine** is a client-side intelligence gathering tool designed to streamline and automate reconnaissance tasks in penetration testing and OSINT operations.
+
+It features:
+- Subdomain Enumeration
+- Technology Detection
+- Origin IP Discovery
+- GitHub Dork Generation
+- Google Dorking Utility
+- Keyword Automation
+- Responsive Theme Toggler (🌙/☀️)
+
+# 🕳️ Dorking Toolkit Modules:
+
+- 🌍 Generic Dorks
+- 🔗 URL-based
+- 🛑 Port-based
+- 🧬 Git leaks
+- 🧩 CMS detection
+- 🧪 OR logic
+- 🧨 All-in-one
