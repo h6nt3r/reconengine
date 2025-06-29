@@ -22,9 +22,7 @@
         </div>
 
         <!-- Theme toggle icon, tightly aligned -->
-        <button id="themeToggle" class="btn btn-outline-secondary" onclick="toggleTheme()" title="Toggle Light/Dark Mode">
-            🌙
-        </button>
+        <button id="themeToggle" class="btn btn-outline-secondary" onclick="toggleTheme()" title="Toggle Light/Dark Mode">🌙</button>
     </div>
 </div>
 
@@ -38,6 +36,8 @@
             </div>
             <div class="row text-center">
                 <div class="col-12">
+                    <button onclick="subdomainDork('https://www.shodan.io/search/facet?query=hostname%3A*.example.com&facet=domain')" type="button" class="btn btn-outline-danger m-1">shodan.io</button>
+                    
                     <button onclick="subdomainDork('https://crt.sh/?q=%25.example.com')" type="button" class="btn btn-outline-danger m-1">crt.sh</button>
 
                     <button onclick="subdomainDork('https://dorki.attaxa.com/search?q=site:example.com')" type="button" class="btn btn-outline-danger m-1">dorki.attaxa.com</button>
@@ -46,7 +46,6 @@
 
                     <button onclick="subdomainDork('https://securitytrails.com/list/apex_domain/example.com')" type="button" class="btn btn-outline-danger m-1">securitytrails.com</button>
 
-                    
 
                     <button onclick="subdomainDork('https://www.vedbex.com/subdomain-finder/example.com')" type="button" class="btn btn-outline-danger m-1">vedbex.com</button>
 
@@ -61,7 +60,6 @@
 
                     <button onclick="subdomainDork('https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=example.com')" type="button" class="btn btn-outline-danger m-1">search.censys.io</button>
                     
-                    <button onclick="subdomainDork('https://www.shodan.io/search?query=example.com')" type="button" class="btn btn-outline-danger m-1">shodan.io</button>
 
                     <button onclick="subdomainDork('https://www.bing.com/search?q=domain%3Aexample.com&qs=n&form=QBRE&sp=-1&lq=0&pq=domain%3Aexample.com&sc=0-18&sk=&cvid=254076E88676423F9EE4789865C87CC7&ghsh=0&ghacc=0&ghpl=')" type="button" class="btn btn-outline-danger m-1">Bing</button>
             </div>
@@ -86,7 +84,9 @@
                 <h4 class="fw-bold">Origin IP finding:</h4>
                 <button onclick="genericDork('https://www.shodan.io/search?query=Ssl.cert.subject.CN%3A%22example.com%22+200')" type="button" class="btn btn-outline-danger m-1">shodan.io(Method 1)</button>
                 
-                <button onclick="genericDork('https://www.shodan.io/search?query=ssl%3A%22example.com%22+200')" type="button" class="btn btn-outline-danger m-1">shodan.io(Method 2)</button>
+                <button onclick="genericDork('https://www.shodan.io/search?query=ssl%3A%22example.com%22+200')" type="button" class="btn btn-outline-danger m-1">shodan.io(cert)</button>
+
+                <button onclick="genericDork('https://www.shodan.io/search/facet?query=hostname%3A*.example.com&facet=ip')" type="button" class="btn btn-outline-danger m-1">shodan.io(Method 3)</button>
 
                 <button onclick="genericDork('https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=example.com')" type="button" class="btn btn-outline-danger m-1">search.censys.io</button>
 
@@ -107,6 +107,8 @@
         <div class="row text-center">
             <div class="col-6">
                 <h4 class="fw-bold">Port scanning:</h4>
+                <button onclick="portDork('https://www.shodan.io/search/facet?query=hostname%3Aexample.com&facet=port')" type="button" class="btn btn-outline-danger m-1">shodan.io</button>
+
                 <button onclick="portDork('https://viewdns.info/portscan/?host=example.com')" type="button" class="btn btn-outline-danger m-1">viewdns.info</button>
 
                 <button onclick="portDork('https://dnschecker.org/port-scanner.php?query=example.com&ptype=server')" type="button" class="btn btn-outline-danger m-1">dnschecker.org</button>
@@ -166,11 +168,15 @@
         </div>
         <div class="row text-center">
             <div class="col-12">
+                <button onclick="genericDork('intitle:Swagger UI (inurl:/swagger-ui/ OR inurl:/swagger/ OR inurl:/api-docs/ OR inurl:/v2/api-docs OR inurl:/v3/api-docs OR inurl:swagger.json OR inurl:swagger.yaml) -github -gitlab -stackoverflow site:example.com')" type="button" class="btn btn-outline-danger m-1">Swagger UI</button>
+
+                <button onclick="genericDork('site:example.com/.env')" type="button" class="btn btn-outline-danger m-1">.env</button>
+
                 <button onclick="genericDork('site:example.com intitle:index.of')" type="button" class="btn btn-outline-danger m-1">Directory listing vulnerabilities</button>
 
                 <button onclick="genericDork('site:example.com intitle:index of inurl:ftp')" type="button" class="btn btn-outline-danger m-1">exposed FTP</button>
 
-		<button onclick="genericDork('site:example.com filetype:pdf')" type="button" class="btn btn-outline-danger m-1">Find PDF's</button>
+		        <button onclick="genericDork('site:example.com filetype:pdf')" type="button" class="btn btn-outline-danger m-1">Find PDF's</button>
 
                 <button onclick="genericDork('site:example.com ext:xml | ext:conf | ext:cnf | ext:reg | ext:inf | ext:rdp | ext:cfg | ext:txt | ext:ora | ext:ini')" type="button" class="btn btn-outline-danger m-1">Exposed configuration file</button>
 
@@ -366,7 +372,7 @@
             <div class="col-6">
                 <div class="input-group mb-3">
                     <span class="input-group-text"><span class="me-1">🎯</span> Target</span> 
-                    <input type="text" id="targets" value='"vulnweb.com" OR org:vulnweb.com' class="form-control" placeholder='"vulnweb.com" OR org:vulnweb.com'>
+                    <input type="text" id="targets" value='"vulnweb.com"' class="form-control" placeholder='"vulnweb.com" OR org:vulnweb.com'>
                     <button class="btn btn-success fw-bold input-group-text d-flex align-items-center gap-1" onclick="Generate()">
     ⚙️ Generate Links
 </button>
